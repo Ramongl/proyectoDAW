@@ -56,7 +56,7 @@
               class="border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-pink-300"
             />
             <button
-              class="bg-gray-300 text-black font-bold text-xs uppercase py-2 hover:bg-rose-300 transition-colors"
+              class="w-full bg-black text-white py-2 uppercase text-xs tracking-widest hover:bg-rose-300"
             >
               Unirse
             </button>
