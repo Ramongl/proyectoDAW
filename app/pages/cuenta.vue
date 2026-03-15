@@ -32,7 +32,7 @@
         <button
           class="text-xs font-bold uppercase border-b border-black self-start hover:text-rose-300 hover:border-rose-500"
         >
-          Crear una cuenta
+          <NuxtLink to="/registro">Crear una cuenta</NuxtLink>
         </button>
       </div>
     </div>
