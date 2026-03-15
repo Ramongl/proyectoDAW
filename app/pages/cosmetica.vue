@@ -49,9 +49,7 @@
                   class="w-full h-full object-contain p-6"
               />
               <div class="absolute bottom-0 left-0 right-0 p-4">
-                <button class="w-full py-2 bg-rose-300 text-white text-[10px] uppercase tracking-widest">
-                  Comprar
-                </button>
+                <BotonCompra></BotonCompra>
               </div>
             </div>
             <h3 class="text-xs font-bold uppercase tracking-tighter hover:text-pink-500">Radiance Serum v.{{i}}</h3>
