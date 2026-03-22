@@ -9,7 +9,7 @@
       <div class="flex items-center justify-between h-20 font-bold">
         
         <div class="flex items-center gap-8">
-          <button class="md:hidden" @click="mobileMenu = !mobileMenu">
+          <button class="md:hidden" @click="menuMovil = !menuMovil">
             ☰
           </button>
         </div>
@@ -35,9 +35,8 @@
       </div>
     </div>
 
-    <!-- Mobile menu -->
     <div
-      v-if="mobileMenu"
+      v-if="menuMovil"
       class="md:hidden bg-white border-t px-4 py-4 space-y-3 z-10"
     >
       <NuxtLink to="/cosmetica" class="block font-bold text-black-400 hover:text-rose-300 uppercase"
@@ -84,5 +83,5 @@
 
 <script setup>
 import { ref } from "vue";
-const mobileMenu = ref(false);
+const menuMovil = ref(false);
 </script>
