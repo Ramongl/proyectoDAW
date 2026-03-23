@@ -22,8 +22,8 @@
         </div>
        
         <div class="flex items-center gap-4 md md:gap-7 ">
-          <NuxtLink to="/cuenta" class="relative hover:text-rose-300">👤</NuxtLink>
-          <NuxtLink to="/carrito" class="relative hover:text-rose-300">
+          <NuxtLink to="/cuenta" class="relative hover:text-rose-500">👤</NuxtLink>
+          <NuxtLink to="/carrito" class="relative hover:text-rose-500">
             🛒
             <span
               class="absolute -bottom-2 -left-2 bg-pink-500 text-white text-xs rounded-full px-1"
@@ -39,19 +39,19 @@
       v-if="menuMovil"
       class="md:hidden bg-white border-t px-4 py-4 space-y-3 z-10"
     >
-      <NuxtLink to="/cosmetica" class="block font-bold text-black-400 hover:text-rose-300 uppercase"
+      <NuxtLink to="/cosmetica" class="block font-bold text-black-400 hover:text-rose-500 uppercase"
         >Cosmética</NuxtLink
       >
-      <NuxtLink to="/maquillaje" class="block font-bold text-black-400 hover:text-rose-300 uppercase"
+      <NuxtLink to="/maquillaje" class="block font-bold text-black-400 hover:text-rose-500 uppercase"
         >Maquillaje</NuxtLink
       >
-      <NuxtLink to="/perfumes" class="block font-bold text-black-400 hover:text-rose-300 uppercase"
+      <NuxtLink to="/perfumes" class="block font-bold text-black-400 hover:text-rose-500 uppercase"
         >Perfumes</NuxtLink
       >
-      <NuxtLink to="/cabello" class="block font-bold text-black-400 hover:text-rose-300 uppercase"
+      <NuxtLink to="/cabello" class="block font-bold text-black-400 hover:text-rose-500 uppercase"
         >Cabello</NuxtLink
       >
-      <NuxtLink to="/higiene" class="block font-bold text-black-400 hover:text-rose-300 uppercase"
+      <NuxtLink to="/higiene" class="block font-bold text-black-400 hover:text-rose-500 uppercase"
         >Higiene</NuxtLink
       >
     </div>
@@ -61,19 +61,19 @@
       class="hidden md:flex border-b border-gray-200 shadow-2xs py-5 "
     >
       <div class="text-xl md:flex font-bold gap-20 mx-auto justify-center">
-        <NuxtLink to="/cosmetica" class="text-black-400 hover:text-rose-300 uppercase"
+        <NuxtLink to="/cosmetica" class="text-black-400 hover:text-rose-500 uppercase"
           >Cosmética</NuxtLink
         >
-        <NuxtLink to="/maquillaje" class="text-black-400 hover:text-rose-300 uppercase"
+        <NuxtLink to="/maquillaje" class="text-black-400 hover:text-rose-500 uppercase"
           >Maquillaje</NuxtLink
         >
-        <NuxtLink to="/perfumes" class="text-black-400 hover:text-rose-300 uppercase"
+        <NuxtLink to="/perfumes" class="text-black-400 hover:text-rose-500 uppercase"
           >Perfumes</NuxtLink
         >
-        <NuxtLink to="/cabello" class="text-black-400 hover:text-rose-300 uppercase"
+        <NuxtLink to="/cabello" class="text-black-400 hover:text-rose-500 uppercase"
           >Cabello</NuxtLink
         >
-        <NuxtLink to="/higiene" class="text-black-400 hover:text-rose-300 uppercase"
+        <NuxtLink to="/higiene" class="text-black-400 hover:text-rose-500 uppercase"
           >Higiene</NuxtLink
         >
       </div>
