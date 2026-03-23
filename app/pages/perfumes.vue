@@ -52,7 +52,7 @@
             </div>
 
             
-            <h3 class="text-xs font-bold uppercase tracking-tighter hover:text-pink-500">Eau de Parfum para Mujer v.{{i}}</h3>
+            <h3 class="text-xs font-bold uppercase tracking-tighter">Eau de Parfum para Mujer v.{{i}}</h3>
             <p class="text-gray-500 text-[15px] mb-2">Eau de Parfum para Mujer</p>
             <span class="text-sm font-semibold">60,00 €</span>
           </div>
