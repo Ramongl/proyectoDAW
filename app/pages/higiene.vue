@@ -64,7 +64,7 @@
             </div>
 
             
-            <h3 class="text-xs font-bold uppercase tracking-tighter hover:text-pink-500">Gel de Baño Hidratante v.{{i}}</h3>
+            <h3 class="text-xs font-bold uppercase tracking-tighter">Gel de Baño Hidratante v.{{i}}</h3>
             <p class="text-gray-500 text-[15px] mb-2">Gel de baño hidratanteo</p>
             <span class="text-sm font-semibold">15,00 €</span>
           </div>
