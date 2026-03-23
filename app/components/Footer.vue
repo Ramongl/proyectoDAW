@@ -12,20 +12,20 @@
             Categorías
           </h3>
           <ul class="flex flex-col gap-3 text-sm text-gray-600">
-            <li class="hover:text-rose-300 cursor-pointer transition-colors">
+            <li class="hover:text-pink-500 cursor-pointer transition-colors">
               <NuxtLink to="/cosmetica">Cosmética</NuxtLink>
             </li>
-            <li class="hover:text-rose-300 cursor-pointer transition-colors">
+            <li class="hover:text-pink-500 cursor-pointer transition-colors">
               <NuxtLink to="/maquillaje">Maquillaje</NuxtLink>
             </li>
-            <li class="hover:text-rose-300 cursor-pointer transition-colors">
+            <li class="hover:text-pink-500 cursor-pointer transition-colors">
               <NuxtLink to="/perfumes">Perfumes</NuxtLink>
             </li>
-            <li class="hover:text-rose-300 cursor-pointer transition-colors">
+            <li class="hover:text-pink-500 cursor-pointer transition-colors">
               <NuxtLink to="/cabello">Cabello</NuxtLink>
             </li>
 
-            <li class="hover:text-rose-300 cursor-pointer transition-colors">
+            <li class="hover:text-pink-500 cursor-pointer transition-colors">
               <NuxtLink to="/higiene">Higiene</NuxtLink>
             </li>
           </ul>
@@ -36,7 +36,7 @@
             Asistencia
           </h3>
           <ul class="flex flex-col gap-3 text-sm text-gray-600">
-            <li class="hover:text-rose-300 cursor-pointer transition-colors">
+            <li class="hover:text-pink-500 cursor-pointer transition-colors">
               <NuxtLink to="/contacto">Contacto</NuxtLink>
             </li>
           </ul>
@@ -56,7 +56,7 @@
               class="border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-pink-300"
             />
             <button
-              class="w-full bg-black text-white py-2 uppercase text-xs tracking-widest hover:bg-rose-300"
+              class="w-full bg-black text-white py-2 uppercase text-xs tracking-widest hover:bg-rose-500"
             >
               Unirse
             </button>
