@@ -52,7 +52,7 @@
                 <BotonCompra></BotonCompra>
               </div>
             </div>
-            <h3 class="text-xs font-bold uppercase tracking-tighter hover:text-pink-500">Radiance Serum v.{{i}}</h3>
+            <h3 class="text-xs font-bold uppercase tracking-tighter">Radiance Serum v.{{i}}</h3>
             <p class="text-gray-500 text-[15px] mb-2">Cuidado Facial Intensivo</p>
             <span class="text-sm font-semibold">45,00 €</span>
           </div>
