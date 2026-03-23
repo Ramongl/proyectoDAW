@@ -63,7 +63,7 @@
             </div>
 
             
-            <h3 class="text-xs font-bold uppercase tracking-tighter hover:text-pink-500">Máscara de pestañas volumen v.{{i}}</h3>
+            <h3 class="text-xs font-bold uppercase tracking-tighter">Máscara de pestañas volumen v.{{i}}</h3>
             <p class="text-gray-500 text-[15px] mb-2">Máscara de pestañas volumen</p>
             <span class="text-sm font-semibold">10,00 €</span>
           </div>
