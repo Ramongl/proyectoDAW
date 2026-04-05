@@ -4,6 +4,6 @@
       <NuxtPage />
     </main>
 
-    <MiFooter />
+    
   
 </template>
