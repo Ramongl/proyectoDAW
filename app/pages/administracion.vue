@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex">
     <div class="h-full max-h-full bg-gray-900">
-      <div  :class="!menuMovil ? 'flex bg-gray-50': 'flex bg-gray-90'">
+      <div :class="!menuMovil ? 'flex bg-gray-50' : 'flex bg-gray-90'">
         <button
           class="md:hidden bg-gray-900 m-5 text-white w-10 h-10 justify-center items-center border border-gray-700 rounded hover:bg-gray-800"
           @click="menuMovil = !menuMovil"
@@ -24,9 +24,10 @@
           <button
             class="py-3 uppercase font-bold hover:text-rose-300"
             @click="
-              admonProd = true;
-              admonStock = false;
+              crearProd = false;
               admonPed = false;
+              admonUsers = false;
+              admonProd = true;
             "
           >
             Administración de productos
@@ -34,18 +35,20 @@
           <button
             class="py-3 uppercase font-bold hover:text-rose-300"
             @click="
-              admonStock = true;
-              admonProd = false;
+              crearProd = false;
               admonPed = false;
+              admonUsers = true;
+              admonProd = false;
             "
           >
-            Añadir y ver inventario
+            Administración de usuarios
           </button>
           <button
             class="py-3 uppercase font-bold hover:text-rose-300"
             @click="
+              crearProd = false;
               admonPed = true;
-              admonStock = false;
+              admonUsers = false;
               admonProd = false;
             "
           >
@@ -56,21 +59,67 @@
           <NuxtLink
             to="/"
             class="text-xl text-gray-400 hover:text-rose-300 font-semibold"
+            >Ir a la tienda</NuxtLink
+          >
+        </div>
+        <div class="p-6 border-t border-zinc-800">
+          <NuxtLink
+            @click="borrarCookie"
+            to="/"
+            class="text-xl text-gray-400 hover:text-rose-300 font-semibold"
             >Salir</NuxtLink
           >
         </div>
       </aside>
     </div>
-    <AdmonProd v-if="admonProd"></AdmonProd>
-    <AdmonStock v-if="admonStock"></AdmonStock>
+    <AdmonProd
+      v-if="admonProd"
+      @IrACrear="prepararNuevo"
+      @editarProducto="prepararEdicion"
+      
+    ></AdmonProd>
+    <AdmonUsers v-if="admonUsers"></AdmonUsers>
     <AdmonPed v-if="admonPed"></AdmonPed>
+    <CrearProductos v-if="crearProd" :productoAEditar="productoSeleccionado" @actualizado="admonProd = true; crearProd = false" ></CrearProductos>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+const authCookie = useCookie("auth_user");
+const productoSeleccionado = ref(null);
+const prepararEdicion = (prod) => {
+  productoSeleccionado.value = prod;
+  admonProd.value = false;
+  crearProd.value = true;
+};
+
+const prepararNuevo = () => {
+  productoSeleccionado.value = null;
+  admonProd.value = false;
+  crearProd.value = true;
+};
+
+const mirarCookie = () => {
+  if (authCookie.value) {
+    const rol = authCookie.value.rol;
+    if (rol === "admon") {
+    } else if (rol === "user") {
+      navigateTo("/");
+    }
+  } else {
+    navigateTo("/");
+  }
+};
+const borrarCookie = () => {
+  authCookie.value = null;
+  mirarCookie();
+};
+mirarCookie();
+
 const menuMovil = ref(true);
 const admonProd = ref(false);
-const admonStock = ref(false);
+const admonUsers = ref(false);
 const admonPed = ref(false);
+const crearProd = ref(false);
 </script>
