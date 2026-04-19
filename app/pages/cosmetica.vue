@@ -1,18 +1,17 @@
-
-
 <template>
   <Cabecera></Cabecera>
   <div class="max-w-7xl mx-auto px-6 py-12">
     <header class="mb-12 text-center">
       <h1 class="text-4xl font-serif italic mb-4">Cosmética</h1>
       <p class="text-gray-500 max-w-2xl mx-auto text-sm tracking-wide">
-        Descubre nuestra selección de alta gama para el cuidado de la piel. 
-        Desde serums revitalizantes hasta cremas hidratantes con extractos naturales.
+        Descubre nuestra selección de alta gama para el cuidado de la piel.
+        Desde serums revitalizantes hasta cremas hidratantes con extractos
+        naturales.
       </p>
     </header>
 
     <div class="flex flex-col lg:flex-row gap-10">
-            <aside class="w-full lg:w-60 flex-shrink-0">
+      <aside class="w-full lg:w-60 flex-shrink-0">
         <div class="sticky top-28 space-y-8">
           <div>
             <h3
@@ -22,18 +21,29 @@
             </h3>
             <ul class="text-sm text-gray-600 space-y-3">
               <li
+                v-if="valorSub"
+                @click="cambiadorSerum"
+                :class="
+                  valorSub === 'serum'
+                    ? 'text-rose-500 font-bold'
+                    : 'text-gray-600'
+                "
                 class="flex justify-between items-center hover:text-pink-500"
               >
                 Serums
-                <p class="text-[10px] text-gray-400"></p>
               </li>
               <li
+                v-if="valorSub"
+                @click="cambiadorCrema"
                 class="flex justify-between items-center hover:text-pink-500"
+                :class="
+                  valorSub === 'hidratante'
+                    ? 'text-rose-500 font-bold'
+                    : 'text-gray-600'
+                "
               >
                 Cremas hidratantes
-                <p class="text-[10px] text-gray-400"></p>
               </li>
-
             </ul>
           </div>
         </div>
@@ -41,20 +51,24 @@
 
       <section class="flex-grow">
         <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
-          <div v-for="i in 6" :key="i" class="group">
+          <div v-for="prod in productos" :key="prod.id" class="group">
             <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-              <img 
-                src="" 
-                  alt="Producto de cosmética"
-                  class="w-full h-full object-contain p-6"
+              <img
+                src=""
+                alt="Producto de cosmética"
+                class="w-full h-full object-contain p-6"
               />
               <div class="absolute bottom-0 left-0 right-0 p-4">
-                <BotonCompra></BotonCompra>
+                <BotonCompra :producto="prod"></BotonCompra>
               </div>
             </div>
-            <h3 class="text-xs font-bold uppercase tracking-tighter">Radiance Serum v.{{i}}</h3>
-            <p class="text-gray-500 text-[15px] mb-2">Cuidado Facial Intensivo</p>
-            <span class="text-sm font-semibold">45,00 €</span>
+            <h3 class="text-xs font-bold uppercase tracking-tighter">
+              {{ prod.marca }}
+            </h3>
+            <p class="text-gray-500 text-[15px] mb-2">{{ prod.nombre }}</p>
+            <span class="text-sm font-semibold"
+              >{{ prod.precio.toString().replace(".", ",") }} €</span
+            >
           </div>
         </div>
       </section>
@@ -63,3 +77,46 @@
   <Footer></Footer>
 </template>
 
+<script setup>
+import { ref } from "vue";
+const valorCat = ref("cosmetica");
+const valorSub = ref("0");
+const productos = ref([]);
+
+const cambiadorSerum = () => {
+  if (valorSub.value != "serum") {
+    valorSub.value = "serum";
+  } else if (valorSub.value == "serum") {
+    valorSub.value = "0";
+  }
+  obtenerProductos();
+};
+
+const cambiadorCrema = () => {
+  if (valorSub.value != "hidratante") {
+    valorSub.value = "hidratante";
+  } else if (valorSub.value == "hidratante") {
+    valorSub.value = "0";
+  }
+  obtenerProductos();
+};
+
+const obtenerProductos = async () => {
+  try {
+    const data = await $fetch("/api/buscar-prod-cateysub", {
+      method: "GET",
+      params: {
+        categoria: valorCat.value,
+        sub: valorSub.value,
+      },
+    });
+
+    productos.value = data;
+  } catch (error) {
+    console.error("Error al obtener productos:", error);
+    alert("No se pudieron cargar los productos");
+  } finally {
+  }
+};
+obtenerProductos();
+</script>
