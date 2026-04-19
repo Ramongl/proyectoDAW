@@ -21,28 +21,51 @@
             </h3>
             <ul class="text-sm text-gray-600 space-y-3">
               <li
+              v-if="valorSub"
+                @click="cambiadorGel"
+                :class="
+                  valorSub === 'gel'
+                    ? 'text-rose-500 font-bold'
+                    : 'text-gray-600'
+                "
                 class="flex justify-between items-center hover:text-pink-500 cursor-pointer"
               >
                 Geles y Jabones
-                <p class="text-[10px] text-gray-400"></p>
               </li>
               <li
+              v-if="valorSub"
+                @click="cambiadorCorporal"
+                :class="
+                  valorSub === 'corporal'
+                    ? 'text-rose-500 font-bold'
+                    : 'text-gray-600'
+                "
                 class="flex justify-between items-center hover:text-pink-500 cursor-pointer"
               >
                 Cuidado Corporal
-                <p class="text-[10px] text-gray-400"></p>
               </li>
               <li
+              v-if="valorSub"
+                @click="cambiadorDesodorante"
+                :class="
+                  valorSub === 'desodorante'
+                    ? 'text-rose-500 font-bold'
+                    : 'text-gray-600'
+                "
                 class="flex justify-between items-center hover:text-pink-500 cursor-pointer"
               >
                 Desodorantes
-                <p class="text-[10px] text-gray-400"></p>
               </li>
               <li
+              @click="cambiadorManos"
+                :class="
+                  valorSub === 'manos'
+                    ? 'text-rose-500 font-bold'
+                    : 'text-gray-600'
+                "
                 class="flex justify-between items-center hover:text-pink-500 cursor-pointer"
               >
                 Cuidado de Manos
-                <p class="text-[10px] text-gray-400"></p>
               </li>
             </ul>
           </div>
@@ -51,26 +74,90 @@
 
       <section class="flex-grow">
         <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
-          <div v-for="i in 6" :key="i" class="group">
+          <div v-for="prod in productos" :key="prod.id" class="group">
             <div class="relative aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
-              <img 
-                src="" 
-                  alt="Producto de higiene"
-                  class="w-full h-full object-contain p-6"
+              <img
+                src=""
+                alt="Producto de higiene"
+                class="w-full h-full object-contain p-6"
               />
               <div class="absolute bottom-0 left-0 right-0 p-4">
-                <BotonCompra></BotonCompra>
+                <BotonCompra :producto="prod"></BotonCompra>
               </div>
             </div>
-
-            
-            <h3 class="text-xs font-bold uppercase tracking-tighter">Gel de Baño Hidratante v.{{i}}</h3>
-            <p class="text-gray-500 text-[15px] mb-2">Gel de baño hidratanteo</p>
-            <span class="text-sm font-semibold">15,00 €</span>
+            <h3 class="text-xs font-bold uppercase tracking-tighter">
+              {{ prod.marca }}
+            </h3>
+            <p class="text-gray-500 text-[15px] mb-2">{{ prod.nombre }}</p>
+            <span class="text-sm font-semibold"
+              >{{ prod.precio.toString().replace(".", ",") }} €</span
+            >
           </div>
         </div>
-      </section>>
+      </section>
     </div>
   </div>
   <Footer></Footer>
 </template>
+
+<script setup>
+import { ref } from "vue";
+const valorCat = ref("higiene");
+const valorSub = ref("0");
+const productos = ref([]);
+
+const cambiadorGel = () => {
+  if (valorSub.value != "gel") {
+    valorSub.value = "gel";
+  } else if (valorSub.value == "gel") {
+    valorSub.value = "0";
+  }
+  obtenerProductos();
+};
+
+const cambiadorCorporal = () => {
+  if (valorSub.value != "corporal") {
+    valorSub.value = "corporal";
+  } else if (valorSub.value == "corporal") {
+    valorSub.value = "0";
+  }
+  obtenerProductos();
+};
+
+const cambiadorDesodorante = () => {
+  if (valorSub.value != "desodorante") {
+    valorSub.value = "desodorante";
+  } else if (valorSub.value == "desodorante") {
+    valorSub.value = "0";
+  }
+  obtenerProductos();
+};
+
+const cambiadorManos = () => {
+  if (valorSub.value != "manos") {
+    valorSub.value = "manos";
+  } else if (valorSub.value == "manos") {
+    valorSub.value = "0";
+  }
+  obtenerProductos();
+};
+
+const obtenerProductos = async () => {
+  try {
+    const data = await $fetch("/api/buscar-prod-cateysub", {
+      method: "GET",
+      params: {
+        categoria: valorCat.value,
+        sub: valorSub.value,
+      },
+    });
+
+    productos.value = data;
+  } catch (error) {
+    console.error("Error al obtener productos:", error);
+    alert("No se pudieron cargar los productos");
+  } finally {
+  }
+};
+obtenerProductos();
+</script>
