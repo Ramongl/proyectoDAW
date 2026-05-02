@@ -1,5 +1,15 @@
 <template>
-  <button
-    class="w-full bg-black text-white py-2 uppercase text-xs tracking-widest hover:bg-rose-500"
-  >Comprar</button>
+  <button 
+    @click="carrito.agregar(props.producto)"
+    class="w-full bg-black text-white py-2 text-[10px] uppercase tracking-widest hover:bg-gray-700 transition-all"
+  >
+    Comprar
+  </button>
 </template>
+<script setup>
+import { carrito } from '../utils/carrito'
+
+const props = defineProps(['producto'])
+</script>
+
+
