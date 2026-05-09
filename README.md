@@ -1,75 +1,74 @@
-# Nuxt Minimal Starter
+# Proyecto E-COMMERCE
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
 
-Make sure to install dependencies:
+0. ESTRUCTURA DEL REPOSITORIO
 
-```bash
-# npm
-npm install
+    /app/components: Elementos UI reutilizables
 
-# pnpm
-pnpm install
+    /app/pages: Páginas de la aplicación
 
-# yarn
-yarn install
+    /app/utils: Clases
 
-# bun
-bun install
-```
+    /app/assets/imagenes: Recursos estáticos (imágenes, logos).
 
-## Development Server
+    /app/assets/css: carga de tailwind
 
-Start the development server on `http://localhost:3000`:
+    /server/api: Lógica del servidor.
 
-```bash
-# npm
-npm run dev
+    /server/utils: Conexión a BBDD.
 
-# pnpm
-pnpm dev
+    /SQL: Scripts de creación de tablas y triggers.
 
-# yarn
-yarn dev
+    .env: Credenciales y localización de la base de datos
 
-# bun
-bun run dev
-```
+1. NUXT.JS
+    
+    Revisar que node esté instalado
 
-## Production
+    Clonar el repositorio de github
 
-Build the application for production:
+    Instalar dependencias con npm: 
+        
+        npm install
 
-```bash
-# npm
-npm run build
+    Definir las credenciales de la base de datos en el .env
 
-# pnpm
-pnpm build
+    Levantar el servidor: 
+        
+        npm run dev
 
-# yarn
-yarn build
 
-# bun
-bun run build
-```
+2. TAILWIND
 
-Locally preview production build:
+    En la ruta app/assets/css debe haber un archivo main.css. En el se debe importar la libreria 
+    
+        @import "tailwindcss"
+    
 
-```bash
-# npm
-npm run preview
+    Luego en el archivo nuxt.config.ts se debe incluir como parámetro 
+    
+        css: "['~/assets/css/main.css'],   future: {compatibilityVersion: 4,}
 
-# pnpm
-pnpm preview
 
-# yarn
-yarn preview
+3. CONEXION A BASE DE DE DATOS
 
-# bun
-bun run preview
-```
+    Tras la modificación de las variables definidas en .env, se debe conectar el framework a la BBDD en server/utils/db.ts con el siguiente código:
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+        import mysql from 'mysql2/promise';
+        
+        const pool = mysql.createPool({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD, 
+        database: process.env.DB_NAME,
+        port: Number(process.env.DB_PORT) || 3306,
+        });
+
+        export const db = pool;
+        
+    Con el export garantizaremos que nuestro typescript puede llamar a dicha conexión
+
+4. CARGA DE BBDD
+
+    Utilizar las querys definidas en la ruta /SQL/proyectoeshop.sql para crear las tablas y los triggers
