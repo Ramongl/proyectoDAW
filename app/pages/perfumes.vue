@@ -76,9 +76,15 @@
 
 <script setup>
 import { ref } from "vue";
+
+// Se pasan los valores por defecto para realizar la consulta a la bbdd
+
+
 const valorCat = ref("perfumes");
 const valorSub = ref("0");
 const productos = ref([]);
+
+// Se definen los cambiadores de subcategorias
 
 const cambiadorMujer = () => {
   if (valorSub.value != "mujer") {
@@ -97,6 +103,8 @@ const cambiadorHombre = () => {
   }
   obtenerProductos();
 };
+
+// Se define y se lanza la petición a la BBDD
 
 const obtenerProductos = async () => {
   try {

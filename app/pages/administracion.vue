@@ -86,19 +86,13 @@
 
 <script setup>
 import { ref } from "vue";
+// Se despliega la cookie
 const authCookie = useCookie("auth_user");
-const productoSeleccionado = ref(null);
-const prepararEdicion = (prod) => {
-  productoSeleccionado.value = prod;
-  admonProd.value = false;
-  crearProd.value = true;
-};
 
-const prepararNuevo = () => {
-  productoSeleccionado.value = null;
-  admonProd.value = false;
-  crearProd.value = true;
-};
+
+
+
+// Funcion para revisar la cookie, si es admon, se queda, sino se va a la landing y se le restringe el permiso a entrar
 
 const mirarCookie = () => {
   if (authCookie.value) {
@@ -111,12 +105,36 @@ const mirarCookie = () => {
     navigateTo("/");
   }
 };
+
+// Funcion para eliminar los datos de la cookie si pulsa a salir
 const borrarCookie = () => {
   authCookie.value = null;
   mirarCookie();
 };
+
+// Revisa la cooke
 mirarCookie();
 
+const productoSeleccionado = ref(null);
+// Se recibe desde AdmonProd el producto via @editarProducto y se guarda en prepararEdicion
+// inmediatamente pasa a la vista de editar producto (CrearProductos.vue)
+const prepararEdicion = (prod) => {
+  productoSeleccionado.value = prod;
+  admonProd.value = false;
+  crearProd.value = true;
+
+};
+
+// Se recibe desde AdmonProd el producto via @irACrear
+// inmediatamente pasa a la vista de crear producto  (CrearProductos.vue)
+const prepararNuevo = () => {
+  productoSeleccionado.value = null;
+  admonProd.value = false;
+  crearProd.value = true;
+};
+
+
+// Se definene las vistas, esta pantalla es el gestor de los componentes que se van abriendo
 const menuMovil = ref(true);
 const admonProd = ref(false);
 const admonUsers = ref(false);

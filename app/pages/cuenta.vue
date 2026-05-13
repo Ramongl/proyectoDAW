@@ -44,10 +44,11 @@
 </template>
 
 <script setup>
-
+// Se declara la cookie
 const authCookie = useCookie("auth_user");
 
-
+// Se define la funcion para revisarla, si es administrador y esta logeado, se le redirige a la pagina de gestion
+// Si está logueado y es un user, a la landing.
 const mirarCookie = () => {
   
   if (authCookie.value) {
@@ -60,13 +61,13 @@ const mirarCookie = () => {
   }
 };
 mirarCookie ();
-
+// Se definen las variables del formulario
 const formulario = ref({
   email: "",
   password: "",
 });
 
-
+// Se define la validación con la BBDD del mail y pass y con sus redirecciones segun loguea
 
 const login = async () => {
   try {

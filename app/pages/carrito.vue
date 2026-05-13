@@ -71,7 +71,7 @@
               @click="carrito.quitar(item.id)"
               class="text-black hover:text-rose-500 text-sm p-1"
             >
-              X
+              ❌
             </button>
           </div>
         </div>

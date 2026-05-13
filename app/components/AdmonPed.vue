@@ -66,7 +66,7 @@
 import { ref } from "vue";
 
 const pedidos = ref([]);
-
+// Se define la funcion para recibir los pedidos
 const obtenerPedidos = async () => {
   try {
     const data = await $fetch("/api/buscar-todos-pedidos", {
@@ -81,6 +81,7 @@ const obtenerPedidos = async () => {
   }
 };
 obtenerPedidos();
+// Se define la función para actualizar el estado del pedido
 
 const actualizarEstadoPedido = async (id, nuevoEstado) => {
   try {

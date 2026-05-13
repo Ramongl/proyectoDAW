@@ -265,6 +265,7 @@
   </div>
 </template>
 <script setup>
+// Se definen los valores del formulario que pasaran a la bbdd
 const formulario = ref({
   nombre: "",
   email: "",
@@ -277,6 +278,7 @@ const formulario = ref({
   rol: "user",
 });
 
+// Se crea una variable que acumule los errores
 const errores = ref({
   zipcode: "",
   zipId: "",
@@ -287,7 +289,7 @@ const errores = ref({
   password: "",
 });
 
-
+// Validaciones
 const validarZipCode = () => {
   const valor = formulario.value.zipcode;
 
@@ -377,7 +379,7 @@ const validarPassword = () => {
   }
 };
 
-
+// Limpiar formulario
 const limpiarFormulario = () => {
   formulario.value = {
     nombre: "",
@@ -399,16 +401,18 @@ const limpiarFormulario = () => {
   };
 };
 
+// Como se ha normalizado el codigo zip, debemos crear la variable que pasará a la BBDD y adaptarla
+// ya que tienen que pasar con dos dígitos, asi que si la longitud es menor a 5, se le añade un 0 al inicio
+
 const crearZipId = () => {
   if (formulario.value.zipcode.length == 5) {
-    formulario.value.zipId= formulario.value.zipcode.slice(0, 2);
-
-  } else if (formulario.value.zipcode.length == 4)  {
-    formulario.value.zipId= "0" + formulario.value.zipcode.slice(0, 1);
-
+    formulario.value.zipId = formulario.value.zipcode.slice(0, 2);
+  } else if (formulario.value.zipcode.length == 4) {
+    formulario.value.zipId = "0" + formulario.value.zipcode.slice(0, 1);
   }
-
 };
+
+// Se envia el registro a la BBDD
 const enviarRegistro = async () => {
   errores.value = {
     nombre: "",
@@ -416,10 +420,10 @@ const enviarRegistro = async () => {
     domicilio: "",
     dni: "",
     zipcode: "",
-    zipId:"",
+    zipId: "",
     password: "",
   };
-  crearZipId()
+  crearZipId();
   validarNombre();
   validarEmail();
   validarDNI();
@@ -430,9 +434,12 @@ const enviarRegistro = async () => {
   const tieneErrores = Object.values(errores.value).some(
     (error) => error === 1,
   );
+
   const passwordsCoinciden =
     formulario.value.password == formulario.value.password2;
 
+  // Se revisa si hay algun error
+  // Se revisa si la validacion de constraseña coincide con la contraseña original
   if (tieneErrores || !passwordsCoinciden) {
     alert("Por favor, revisa los errores en el formulario antes de enviarlo.");
   } else {

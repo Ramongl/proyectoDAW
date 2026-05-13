@@ -79,10 +79,14 @@
 
 <script setup>
 import { ref } from "vue";
+
+// Se pasan los valores por defecto para realizar la consulta a la bbdd
 const valorCat = ref("cosmetica");
 const valorSub = ref("0");
 const productos = ref([]);
 
+
+// Se definene los cambiadores de subcategorias
 const cambiadorSerum = () => {
   if (valorSub.value != "serum") {
     valorSub.value = "serum";
@@ -101,6 +105,7 @@ const cambiadorCrema = () => {
   obtenerProductos();
 };
 
+// Se define y se lanza la petición a la BBDD
 const obtenerProductos = async () => {
   try {
     const data = await $fetch("/api/buscar-prod-cateysub", {

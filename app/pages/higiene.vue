@@ -102,9 +102,16 @@
 
 <script setup>
 import { ref } from "vue";
+
+// Se pasan los valores por defecto para realizar la consulta a la bbdd
+ 
+
 const valorCat = ref("higiene");
 const valorSub = ref("0");
 const productos = ref([]);
+
+
+// Se definene los cambiadores de subcategorias
 
 const cambiadorGel = () => {
   if (valorSub.value != "gel") {
@@ -141,6 +148,8 @@ const cambiadorManos = () => {
   }
   obtenerProductos();
 };
+
+// Se define y se lanza la petición a la BBDD
 
 const obtenerProductos = async () => {
   try {

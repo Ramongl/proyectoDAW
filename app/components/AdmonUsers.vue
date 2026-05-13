@@ -120,7 +120,7 @@ import { ref } from "vue";
 const usuarios = ref([]);
 
 
-
+// Se define la funcion para obtener los usuarios
 const obtenerUsuarios = async () => {
   try {
     const data = await $fetch("/api/buscar-todos-usuarios", {
@@ -134,6 +134,8 @@ const obtenerUsuarios = async () => {
   }
 };
 obtenerUsuarios();
+
+// Se define la función para dar la orden de eliminar un usuario
 
 const eliminarUser = async (user) => {
   if (user.rol === 'admon') {

@@ -250,7 +250,7 @@
             <label
               for="descripcion"
               class="text-[10px] font-bold uppercase tracking-widest leading-none text-gray-400 mb-3"
-              >Subcategoría del producto</label
+              >Descripción del producto</label
             >
             <textarea
               @input="validarLogitudesDesc"
@@ -520,7 +520,7 @@
             <label
               for="descripcion"
               class="text-[10px] font-bold uppercase tracking-widest leading-none text-gray-400 mb-3"
-              >Subcategoría del producto</label
+              >Descripción del producto</label
             >
             <textarea
               @input="validarLogitudesDesc"
@@ -554,7 +554,9 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['actualizado'])
+
+// Se pasa el estado actualizado para que swapee la vista y utilice el backend correspondiente
+const emit = defineEmits(["actualizado"]);
 const props = defineProps({
   productoAEditar: {
     type: Object,
@@ -562,15 +564,22 @@ const props = defineProps({
   },
 });
 
+// Se pasa desde AdmonProd los datos del formulario correspondientes al producto a modificar
+
 onMounted(() => {
   if (props.productoAEditar) {
     formulario.value = { ...props.productoAEditar };
   }
 });
 
+// En el formulario de creación de producto, se elimina la subcategoria para que una vez se seleccione la categoria
+// correspondiente, eliga las opciones
+
 const eliminarSubategoria = () => {
   formulario.value.subcategoria = "";
 };
+
+// Se declara en la creación de pedidos que los datos del formulario estén vacios
 
 const formulario = ref({
   marca: "",
@@ -582,6 +591,8 @@ const formulario = ref({
   descripcion: "",
 });
 
+// Se crea una variable para almancenar todos los errores de las validaciones
+
 const errores = ref({
   marca: "",
   nombre: "",
@@ -591,6 +602,8 @@ const errores = ref({
   subcategoria: "",
   descripcion: "",
 });
+
+// Se crea funcion para reestablecer los datos del formulario una vez se envíe
 
 const limpiarFormulario = () => {
   formulario.value = {
@@ -614,6 +627,7 @@ const limpiarFormulario = () => {
     descripcion: "",
   };
 };
+// Validación de longitud en el campo marca
 
 const validarLogitudesMarca = () => {
   const valor = formulario.value.marca.trim();
@@ -630,6 +644,10 @@ const validarLogitudesMarca = () => {
   }
 };
 
+// Validación del campo categoria, si no se marca ninguno, dará error
+
+
+
 const validarCategoria = () => {
   const valor = formulario.value.categoria;
 
@@ -640,6 +658,8 @@ const validarCategoria = () => {
   }
 };
 
+// Validación del campo subcategoria, si no se marca ninguno, dará error
+
 const validarSubCategoria = () => {
   const valor = formulario.value.subcategoria;
 
@@ -649,6 +669,8 @@ const validarSubCategoria = () => {
     errores.value.subcategoria = 0;
   }
 };
+
+// Validación de longitud en el campo nombre
 
 const validarLogitudesNombre = () => {
   const valor = formulario.value.nombre.trim();
@@ -665,6 +687,8 @@ const validarLogitudesNombre = () => {
   }
 };
 
+// Validación de longitud y valor en el campo precio
+
 const validarLogitudesPrecio = () => {
   const valor = formulario.value.precio;
 
@@ -680,6 +704,8 @@ const validarLogitudesPrecio = () => {
   }
 };
 
+// Validación de longitud y valor en el campo stock y
+
 const validarLogitudesStock = () => {
   const valor = formulario.value.stock;
 
@@ -694,6 +720,8 @@ const validarLogitudesStock = () => {
     errores.value.stock = 1;
   }
 };
+
+// Validación de longitud en el campo descripcion
 const validarLogitudesDesc = () => {
   const valor = formulario.value.descripcion.trim();
 
@@ -708,6 +736,8 @@ const validarLogitudesDesc = () => {
     errores.value.descripcion = 1;
   }
 };
+
+// Función para enviar el producto nuevo a la bbdd, se reemplaza la coma del precio para que no de error
 const enviarProducto = async () => {
   const precioLimpio = formulario.value.precio.toString().replace(",", ".");
   formulario.value.precio = parseFloat(precioLimpio);
@@ -716,6 +746,7 @@ const enviarProducto = async () => {
     descripcion: "",
   };
 
+  // Se llaman a las validaciones
   validarLogitudesMarca();
   validarLogitudesNombre();
   validarLogitudesDesc();
@@ -744,8 +775,10 @@ const enviarProducto = async () => {
     }
   }
 };
-
+// Función para editar un producto de la bbdd
 const editarProducto = async () => {
+  const precioLimpio = formulario.value.precio.toString().replace(",", ".");
+  formulario.value.precio = parseFloat(precioLimpio);
   validarLogitudesMarca();
   validarLogitudesNombre();
   validarLogitudesDesc();
@@ -770,8 +803,7 @@ const editarProducto = async () => {
     });
 
     alert("¡Producto actualizado!");
-    emit('actualizado');
-    
+    emit("actualizado");
   } catch (error) {
     console.error("Error en la petición:", error);
     alert(error.data?.message || "Error al procesar la solicitud");

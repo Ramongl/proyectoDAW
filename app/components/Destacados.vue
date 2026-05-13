@@ -40,7 +40,7 @@ import { ref } from "vue";
 const productos = ref([]);
 
 
-
+// Se buscan los productos definidos en productos-destacados (4 más vendidos que tienen stock)
 const obtenerProductos = async () => {
   try {
     const data = await $fetch("/api/productos-destacados", {

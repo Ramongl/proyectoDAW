@@ -2,7 +2,7 @@ import { db } from "../utils/db";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-
+  // Se leen las variables enviadas por el front
   const {
     id,
     marca,
@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
   } = body;
 
   try {
+    // Se realiza update con los datos recibidos
     await db.query(
       `UPDATE productos 
        SET marca = ?, 
@@ -41,12 +42,14 @@ export default defineEventHandler(async (event) => {
     );
 
     return {
+      // Se lanza mensaje de exito
       success: true,
       message: "Producto actualizado correctamente",
     };
   } catch (error) {
+    // Se notifica el error
     console.error("Error al actualizar el producto:", error);
-
+    // Se envia al navegador el error codigo 500 y el mensaje predefinido 
     throw createError({
       statusCode: 500,
       message:

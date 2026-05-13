@@ -116,13 +116,23 @@
 
 <script setup>
 import { ref } from "vue";
+// Se importa la variable creada en carrito.js para visualizar la cantidad de elementos que hay en
+// el carrito
 import { totalCantidades } from '../utils/carrito'
 
+
+// Se define variable para desplegar el menu en la vista moviñ
 const menuMovil = ref(false);
+
+// Se define la cookie
+
 const authCookie = useCookie("auth_user");
+
+// Se declara variable para ver si el usuario logeado es admon o no
 const admonCheck = ref(false);
 var estado = 0;
 
+// Se declara funcion para revisar la cookie y mirar si es admon o no
 const mirarCookie = () => {
   if (authCookie.value) {
     estado = 1;
@@ -135,7 +145,7 @@ const mirarCookie = () => {
     estado = 0;
   }
 };
-
+// Funcion para borrar la cookie y desloguear
 const borrarCookie = () => {
   authCookie.value = null;
   estado = 0;

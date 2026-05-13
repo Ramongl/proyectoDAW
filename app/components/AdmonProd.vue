@@ -122,14 +122,19 @@
 
 <script setup>
 import { ref } from "vue";
+
+// Se define los emits para comunicarlo administracion.vue
 const emit = defineEmits(["irACrear", "editarProducto"]);
 
 const productos = ref([]);
 
+// Envia el producto al componente abuelo
 const irAEditar = (prod) => {
   emit("editarProducto", prod);
 };
 
+
+// Se declara la funcion para buscar todos los productos
 const obtenerProductos = async () => {
   try {
     const data = await $fetch("/api/buscar-todos-productos", {
